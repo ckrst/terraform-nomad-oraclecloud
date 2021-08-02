@@ -10,3 +10,7 @@ variable "oracle_compartment_id" {}
 variable "oracle_availability_domain" {}
 
 variable "public_key" {}
+
+variable "nomad_version" {
+  default = "1.1.0"
+}
