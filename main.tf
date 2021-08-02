@@ -34,6 +34,8 @@ resource "oci_core_vcn" "nomad_vcn" {
     freeform_tags = {}
     is_ipv6enabled = false
     timeouts {}
+
+    default_route_table_id = oci_core_route_table.nomad_route_table.id
 }
 
 resource "oci_core_subnet" "nomad_subnet" {
