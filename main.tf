@@ -35,7 +35,6 @@ resource "oci_core_vcn" "nomad_vcn" {
     is_ipv6enabled = false
     timeouts {}
 
-    default_route_table_id = oci_core_route_table.nomad_route_table.id
 }
 
 resource "oci_core_subnet" "nomad_subnet" {
@@ -49,14 +48,15 @@ resource "oci_core_subnet" "nomad_subnet" {
     dns_label = "nomadsubnet"
 
     defined_tags = {
-      "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/vinicius.kirst@gmail.com"
+      "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/${var.oracle_account_email}"
       # "Oracle-Tags.CreatedOn" = "2021-04-09T05:17:56.745Z"
     }
     dhcp_options_id = oci_core_dhcp_options.nomad_dhcp_options.id
     freeform_tags = {}
     prohibit_internet_ingress = false
     prohibit_public_ip_on_vnic = false
-    route_table_id = oci_core_route_table.nomad_route_table.id
+    # route_table_id = oci_core_route_table.nomad_route_table.id
+    route_table_id = oci_core_vcn.nomad_vcn.default_route_table_id
     security_list_ids = [
       oci_core_security_list.nomad_security_list.id,
     ]
@@ -68,18 +68,18 @@ resource "oci_core_internet_gateway" "nomad_internet_gateway" {
     display_name = "NomadInternetGateway"
 }
 
-resource "oci_core_route_table" "nomad_route_table" {
-  compartment_id = var.oracle_compartment_id
-  vcn_id = oci_core_vcn.nomad_vcn.id
-
-  display_name = "Nomad Route Table"
-
-  route_rules {
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.nomad_internet_gateway.id
-  }
-}
+# resource "oci_core_route_table" "nomad_route_table" {
+#   compartment_id = var.oracle_compartment_id
+#   vcn_id = oci_core_vcn.nomad_vcn.id
+#
+#   display_name = "Nomad Route Table"
+#
+#   route_rules {
+#     destination       = "0.0.0.0/0"
+#     destination_type  = "CIDR_BLOCK"
+#     network_entity_id = oci_core_internet_gateway.nomad_internet_gateway.id
+#   }
+# }
 
 locals {
   search_domain_name = "${oci_core_vcn.nomad_vcn.dns_label}.oraclevcn.com"
