@@ -1,5 +1,4 @@
 resource "oci_core_instance" "nomad_client1" {
-  count = 0
   availability_domain = "nbBK:US-ASHBURN-AD-1"
   compartment_id = var.oracle_compartment_id
   shape = "VM.Standard.E2.1.Micro"
