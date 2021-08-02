@@ -24,9 +24,9 @@ resource "oci_core_vcn" "nomad_vcn" {
     display_name = "NomadVCN"
     dns_label = "nomadvcn"
 
-    cidr_blocks = [
-      "10.0.0.0/16",
-    ]
+    # cidr_blocks = [
+    #   "10.0.0.0/16",
+    # ]
     defined_tags = {
       "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/${var.oracle_account_email}"
       # "Oracle-Tags.CreatedOn" = "2021-04-09T05:17:53.824Z"
