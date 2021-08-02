@@ -1,6 +1,7 @@
 data "oci_core_image" "ubuntu_image" {
   #Required
-  image_id = "ocid1.image.oc1.iad.aaaaaaaalnsxbpterctwu7k3kfadhizokykbs7pbdehxypj7ogpsmv4rjita"
+  # image_id = "ocid1.image.oc1.iad.aaaaaaaalnsxbpterctwu7k3kfadhizokykbs7pbdehxypj7ogpsmv4rjita" #minimal
+  image_id = "ocid1.image.oc1.iad.aaaaaaaaoomqgvfu6zd3dhtrilbvo2s7qhmlqiodcogoonhpc2kgl5qlhddq"
 }
 
 # oracle instances
