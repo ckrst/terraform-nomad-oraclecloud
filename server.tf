@@ -1,6 +1,12 @@
 data "oci_core_image" "ubuntu_image" {
   #Required
   # image_id = "ocid1.image.oc1.iad.aaaaaaaalnsxbpterctwu7k3kfadhizokykbs7pbdehxypj7ogpsmv4rjita" #minimal
+  image_id = "ocid1.image.oc1.iad.aaaaaaaayfc7vgsvgtmrlka74mdhyawbjmpcllntrowcuimb6nfxyqur734q"
+  }
+
+data "oci_core_image" "arm_ubuntu_image" {
+  #Required
+  # image_id = "ocid1.image.oc1.iad.aaaaaaaalnsxbpterctwu7k3kfadhizokykbs7pbdehxypj7ogpsmv4rjita" #minimal
   image_id = "ocid1.image.oc1.iad.aaaaaaaaoomqgvfu6zd3dhtrilbvo2s7qhmlqiodcogoonhpc2kgl5qlhddq"
 }
 
@@ -18,8 +24,9 @@ resource "oci_core_instance" "nomad_server" {
   display_name = "Nomad Server"
   metadata = {
     ssh_authorized_keys = var.public_key
+    ssh_authorized_keys = var.public_key
     # userdata = ""
-  }
+  }arm_
   source_details {
       source_id = data.oci_core_image.ubuntu_image.image_id
       source_type = "image"
