@@ -24,9 +24,8 @@ resource "oci_core_instance" "nomad_server" {
   display_name = "Nomad Server"
   metadata = {
     ssh_authorized_keys = var.public_key
-    ssh_authorized_keys = var.public_key
     # userdata = ""
-  }arm_
+  }
   source_details {
       source_id = data.oci_core_image.ubuntu_image.image_id
       source_type = "image"
